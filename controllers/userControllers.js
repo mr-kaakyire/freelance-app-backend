@@ -3,10 +3,9 @@ import User from "../models/User.js";
 import { fileRemover } from "../utils/fileRemover.js";
 import https from "https";
 
-
 const registerUser = async (req, res, next) => {
   try {
-    const { name, email,tel, password } = req.body;
+    const { name, email, tel, password } = req.body;
 
     //check user exists
     let user = await User.findOne({ email });
@@ -28,7 +27,7 @@ const registerUser = async (req, res, next) => {
       avatar: user.avatar,
       name: user.name,
       email: user.email,
-      tel:user.tel,
+      tel: user.tel,
       verified: user.verified,
       partner: user.partner,
       admin: user.admin,
@@ -42,7 +41,7 @@ const registerUser = async (req, res, next) => {
       revisions: user.revisions,
       ratings: user.ratings,
       gigType: user.gigType,
-      servicesInProgress:user.servicesInProgress
+      servicesInProgress: user.servicesInProgress,
     });
   } catch (error) {
     // return res.status(500).json({message:"Something went wrong"})
@@ -65,7 +64,7 @@ const loginUser = async (req, res, next) => {
         avatar: user.avatar,
         name: user.name,
         email: user.email,
-        tel:user.tel,
+        tel: user.tel,
         verified: user.verified,
         partner: user.partner,
         admin: user.admin,
@@ -79,7 +78,7 @@ const loginUser = async (req, res, next) => {
         revisions: user.revisions,
         ratings: user.ratings,
         gigType: user.gigType,
-        servicesInProgress:user.servicesInProgress
+        servicesInProgress: user.servicesInProgress,
       });
     } else {
       throw new Error("Invalid email or password");
@@ -98,7 +97,7 @@ const userProfile = async (req, res, next) => {
         avatar: user.avatar,
         name: user.name,
         email: user.email,
-        tel:user.tel,
+        tel: user.tel,
         verified: user.verified,
         partner: user.partner,
         admin: user.admin,
@@ -111,7 +110,7 @@ const userProfile = async (req, res, next) => {
         revisions: user.revisions,
         ratings: user.ratings,
         gigType: user.gigType,
-        servicesInProgress:user.servicesInProgress
+        servicesInProgress: user.servicesInProgress,
       });
     } else {
       let error = new Error("User not found");
@@ -135,7 +134,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
         admin: updatedUserProfile.admin,
@@ -149,7 +148,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
     if (req.body.skill && !user.skills.includes(req.body.skill)) {
@@ -160,7 +159,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -175,7 +174,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
 
@@ -190,7 +189,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
         admin: updatedUserProfile.admin,
@@ -204,7 +203,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
 
@@ -216,7 +215,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -231,7 +230,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
 
@@ -243,7 +242,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -258,7 +257,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
     if (req.body.deliveryTime && req.body.deliveryTime != user.deliveryTime) {
@@ -269,7 +268,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -284,7 +283,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
 
@@ -299,7 +298,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -314,7 +313,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
     if (req.body.revisions && req.body.revisions != user.revisions) {
@@ -325,7 +324,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -340,7 +339,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
     if (req.body.gigType && req.body.gigType != user.gigType) {
@@ -351,7 +350,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -366,7 +365,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
     if (req.body.ratings && req.body.ratings != user.ratings) {
@@ -377,7 +376,7 @@ const updateProfile = async (req, res, next) => {
         avatar: updatedUserProfile.avatar,
         name: updatedUserProfile.name,
         email: updatedUserProfile.email,
-        tel:updatedUserProfile.tel,
+        tel: updatedUserProfile.tel,
         verified: updatedUserProfile.verified,
         partner: updatedUserProfile.partner,
 
@@ -392,7 +391,7 @@ const updateProfile = async (req, res, next) => {
         revisions: updatedUserProfile.revisions,
         ratings: updatedUserProfile.ratings,
         gigType: updatedUserProfile.gigType,
-        servicesInProgress:updatedUserProfile.servicesInProgress
+        servicesInProgress: updatedUserProfile.servicesInProgress,
       });
     }
 
@@ -451,7 +450,7 @@ const updateProfilePicture = async (req, res, next) => {
             avatar: updatedUser.avatar,
             name: updatedUser.name,
             email: updatedUser.email,
-            tel:updatedUser.tel,
+            tel: updatedUser.tel,
             verified: updatedUser.verified,
             partner: updatedUser.partner,
             admin: updatedUser.admin,
@@ -465,7 +464,7 @@ const updateProfilePicture = async (req, res, next) => {
             revisions: updatedUser.revisions,
             ratings: updatedUser.ratings,
             gigType: updatedUser.gigType,
-            servicesInProgress:updatedUser.servicesInProgress
+            servicesInProgress: updatedUser.servicesInProgress,
           });
         } else {
           let filename;
@@ -479,7 +478,7 @@ const updateProfilePicture = async (req, res, next) => {
             avatar: updatedUser.avatar,
             name: updatedUser.name,
             email: updatedUser.email,
-            tel:updatedUser.tel,
+            tel: updatedUser.tel,
             verified: updatedUser.verified,
             partner: updatedUser.partner,
             admin: updatedUser.admin,
@@ -493,7 +492,7 @@ const updateProfilePicture = async (req, res, next) => {
             revisions: updatedUser.revisions,
             ratings: updatedUser.ratings,
             gigType: updatedUser.gigType,
-            servicesInProgress:updatedUser.servicesInProgress
+            servicesInProgress: updatedUser.servicesInProgress,
           });
         }
       }
@@ -540,17 +539,28 @@ const searchPartners = async (req, res, next) => {
   }
 };
 
+const deleteSkill = async (req, res, next) => {
+  
+ try {
+  await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $set: { [`skills.${req.body.arrayIndex}`]: null } },
+    { new: true }
+  );
+  // 
+  res.status(200).json("Skill deleted");
+ } catch (error) {
+  next(error)
+  
+ }
+};
 
 const payPartner = async (req, res, next) => {
-
   const seller = await User.find({ _id: req.body._id }).select("-password");
-
-  
-
 
   const params = JSON.stringify({
     amount: seller[0].basePrice,
-    email:req.user.email,
+    email: req.user.email,
     currency: "GHS",
     mobile_money: {
       phone: req.body.tel,
@@ -583,7 +593,7 @@ const payPartner = async (req, res, next) => {
       });
     })
     .on("error", (error) => {
-      next(error)
+      next(error);
       console.error(error);
     });
 
@@ -601,4 +611,5 @@ export {
   getSeller,
   searchPartners,
   payPartner,
+  deleteSkill
 };

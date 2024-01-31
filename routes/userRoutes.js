@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllPartners, getSeller, loginUser, registerUser,searchPartners,updateProfile,updateProfilePicture,userProfile,payPartner } from "../controllers/userControllers.js";
+import { getAllPartners, getSeller, loginUser, registerUser,searchPartners,updateProfile,updateProfilePicture,userProfile,payPartner,deleteSkill } from "../controllers/userControllers.js";
 import { authGuard } from "../middleware/authMiddleware.js";
 
 
@@ -16,6 +16,8 @@ router.get("/getAllPartners",getAllPartners);
 router.get("/getSeller",authGuard,getSeller);
 router.get("/searchPartners",authGuard,searchPartners);
 router.post("/payPartner",authGuard,payPartner)
+router.post("/deleteSkill",authGuard,deleteSkill)
+
 
 
 export default router;
