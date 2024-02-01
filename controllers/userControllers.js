@@ -540,19 +540,37 @@ const searchPartners = async (req, res, next) => {
 };
 
 const deleteSkill = async (req, res, next) => {
-  
- try {
-  await User.findOneAndUpdate(
-    { _id: req.user._id },
-    { $set: { [`skills.${req.body.arrayIndex}`]: null } },
-    { new: true }
-  );
-  // 
-  res.status(200).json("Skill deleted");
- } catch (error) {
-  next(error)
-  
- }
+  try {
+    await User.updateOne(
+      { _id: req.user._id },
+      { $pull: { skills: { $in: [req.body.skill] } } }
+    );
+    let updatedUser = await User.findById(req.user._id);
+
+    res.json({
+      _id: updatedUser._id,
+      avatar: updatedUser.avatar,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      tel: updatedUser.tel,
+      verified: updatedUser.verified,
+      partner: updatedUser.partner,
+      admin: updatedUser.admin,
+      token: await updatedUser.generateJWT(),
+      description: updatedUser.description,
+      skills: updatedUser.skills,
+      certifications: updatedUser.certifications,
+      basePrice: updatedUser.basePrice,
+      deliveryTime: updatedUser.deliveryTime,
+      gigDescription: updatedUser.gigDescription,
+      revisions: updatedUser.revisions,
+      ratings: updatedUser.ratings,
+      gigType: updatedUser.gigType,
+      servicesInProgress: updatedUser.servicesInProgress,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const payPartner = async (req, res, next) => {
@@ -611,5 +629,5 @@ export {
   getSeller,
   searchPartners,
   payPartner,
-  deleteSkill
+  deleteSkill,
 };
