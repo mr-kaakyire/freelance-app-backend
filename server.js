@@ -3,13 +3,15 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import { errorResponseHandler, invalidPathHandler } from "./middleware/errorHandler.js";
 import cors from "cors"
+import bodyParser from "body-parser";
 //Routes
 import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 connectDB();
 const app = express();
-
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors({origin: '*'}))
 app.use(express.json());
 
@@ -20,7 +22,8 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes);
 
 
-app.use('/uploads', express.static('uploads'));
+
+
 
 
 app.use(invalidPathHandler)

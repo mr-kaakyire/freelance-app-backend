@@ -1,56 +1,56 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
-import any from 'jsonwebtoken';
+import any from "jsonwebtoken";
 const { sign } = any;
 
-import pkg from 'bcryptjs';
-const { hash,compare } = pkg;
-
+import pkg from "bcryptjs";
+const { hash, compare } = pkg;
 
 const UserSchema = new Schema(
-  {
-    avatar: { type: String, default: "" },
-    name: { type: String, required: true },
-    email: { type: String, required: true,lowercase:true },
+  { avatar:{type:String,required:false, default:''},
+    username: { type: String, required: true },
     password: { type: String, required: true },
-    tel:{type:String,required:true},
-    verified: { type: Boolean, default: false },
-    verificationCode: { type: String, required: false },
-    partner:{type:Boolean,default:true,required:false},
     admin: { type: Boolean, required: false },
-    description:{type:String,default:""},
-    skills:{type:[String],required:false},
-    certifications:{type:[String],required:false},
-    basePrice:{type:Number,default:0,required:false},
-    deliveryTime:{type:Number,default:0,required:false},
-    revisions:{type:String,default:"",required:false},
-    gigDescription:{type:String,default:"",required:false},
-    ratings:{type:Number,default:0,required:false},
-    gigType:{type:String,default:"",required:false,lowercase:true},
-    servicesInProgress:{type:[String],required:false}
+    gameHistory:[{
+      gameId:{type:mongoose.Schema.Types.ObjectId, default:mongoose.Types.ObjectId},
+      wordCount:{type:Number},
+      score:{type:Number},
+      wordPerMinute:{type:Number},
+      accuracy:{type:Number},
+      gameTime:{type:Number,default:0},
+      totalNumberOfWords:{type:Number,default:0},
+      isHighestScore:{type:Boolean,default:true},
+      timestamp:{type:Date, default:Date.now}
+    }],
+    numberOfRestarts:{type:Number,default:0},
+    highestScore:{type:Number, default:0},
+    highestWordCount:{type:Number,default:0},
+    highestTimestamp:{type:String,default:''},
+    totalNumberOfWordsAtHighest:{type:Number,default:0},
+    gameTimeAtHighest:{type:Number,default:0},
+    ratings: { type: Number, default: 0, required: false },
   },
   { timestamps: true }
 );
 
-UserSchema.pre("save", async function(next){
-    if(this.isModified("password")){
-        this.password=await hash(this.password,10);
-        return next()
-    }
-    return next()
-})
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await hash(this.password, 10);
+    return next();
+  }
+  return next();
+});
 
-UserSchema.methods.generateJWT=async function(){
-    return await sign({id:this._id},process.env.JWT_SECRET,{expiresIn:"30d"})
-}
+UserSchema.methods.generateJWT = async function () {
+  return await sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
-UserSchema.methods.comparePassword= async function(enteredPassword){
-  return await compare(enteredPassword,this.password);
+UserSchema.methods.comparePassword = async function (enteredPassword) {
+  return await compare(enteredPassword, this.password);
+};
 
-}
+const  User = model("User", UserSchema);
 
-const User=model("User",UserSchema);
-
-
-
-export default User;
+export default  User;
