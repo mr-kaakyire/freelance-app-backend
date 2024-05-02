@@ -10,9 +10,8 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 connectDB();
 const app = express();
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
-app.use(cors({origin: '*'}))
+app.use(cors({ origin: 'http://localhost:4200' }));
+app.options('*', cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {

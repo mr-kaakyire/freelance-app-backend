@@ -12,7 +12,7 @@ const UserSchema = new Schema(
     password: { type: String, required: true },
     admin: { type: Boolean, required: false },
     gameHistory:[{
-      gameId:{type:mongoose.Schema.Types.ObjectId, default:mongoose.Types.ObjectId},
+
       wordCount:{type:Number},
       score:{type:Number},
       wordPerMinute:{type:Number},

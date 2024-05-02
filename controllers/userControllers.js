@@ -25,7 +25,7 @@ const registerUser = async (req, res, next) => {
     });
     return res.status(200).json({
       _id: user._id,
-      avatar:user.avatar,
+      avatar: user.avatar,
       username: user.username,
       password: user.password,
       admin: user.admin,
@@ -38,7 +38,7 @@ const registerUser = async (req, res, next) => {
       gameTimeAtHighest: user.gameTimeAtHighest,
       ratings: user.ratings,
       token: await user.generateJWT(),
-      createdAt:user.createdAt
+      createdAt: user.createdAt,
     });
   } catch (error) {
     // return res.status(500).json({message:"Something went wrong"})
@@ -58,7 +58,7 @@ const loginUser = async (req, res, next) => {
     if (await user.comparePassword(password)) {
       res.status(200).json({
         _id: user._id,
-        avatar:user.avatar,
+        avatar: user.avatar,
         username: user.username,
         password: user.password,
         admin: user.admin,
@@ -71,7 +71,7 @@ const loginUser = async (req, res, next) => {
         gameTimeAtHighest: user.gameTimeAtHighest,
         ratings: user.ratings,
         token: await user.generateJWT(),
-        createdAt:user.createdAt
+        createdAt: user.createdAt,
       });
     } else {
       throw new Error("Invalid username or password");
@@ -87,7 +87,7 @@ const userProfile = async (req, res, next) => {
     if (user) {
       return res.status(201).json({
         _id: user._id,
-        avatar:user.avatar,
+        avatar: user.avatar,
         username: user.username,
         password: user.password,
         admin: user.admin,
@@ -100,7 +100,7 @@ const userProfile = async (req, res, next) => {
         gameTimeAtHighest: user.gameTimeAtHighest,
         ratings: user.ratings,
         token: await user.generateJWT(),
-        createdAt:user.createdAt
+        createdAt: user.createdAt,
       });
     } else {
       let error = new Error("User not found");
@@ -128,7 +128,7 @@ const updateGameHistory = async (req, res, next) => {
       totalNumberOfWordsAtHighest,
       gameTimeAtHighest,
       numberOfRestarts,
-      totalNumberOfWords
+      totalNumberOfWords,
     } = req.body;
 
     let user = await User.findOneAndUpdate(
@@ -144,13 +144,11 @@ const updateGameHistory = async (req, res, next) => {
             gameTime,
             timeStamp,
             isHighestScore,
-            totalNumberOfWords
-
-          
+            totalNumberOfWords,
           },
         },
         $set: {
-          numberOfRestarts:numberOfRestarts,
+          numberOfRestarts: numberOfRestarts,
           highestScore: highestScore,
           highestWordCount: highestWordCount,
           highestTimestamp: highestTimestamp,
@@ -162,7 +160,7 @@ const updateGameHistory = async (req, res, next) => {
     );
     res.json({
       _id: user._id,
-      avatar:user.avatar,
+      avatar: user.avatar,
       username: user.username,
       admin: user.admin,
       ratings: user.ratings,
@@ -174,7 +172,7 @@ const updateGameHistory = async (req, res, next) => {
       gameTimeAtHighest: user.gameTimeAtHighest,
       totalNumberOfWordsAtHighest: user.totalNumberOfWordsAtHighest,
       token: await user.generateJWT(),
-      createdAt:user.createdAt
+      createdAt: user.createdAt,
     });
   } catch (error) {
     next(error);
@@ -185,30 +183,26 @@ const updateAvatar = async (req, res, next) => {
   try {
     let user = await User.findById(req.user._id);
 
-    console.log(req.body.avatar)
-      user.avatar = req.body.avatar;
-      const updatedUserProfile = await user.save();
-      res.json({
-        _id: updatedUserProfile._id,
-        avatar: updatedUserProfile.avatar,
-        username: updatedUserProfile.username,
-        password: updatedUserProfile.password,
-        admin: updatedUserProfile.admin,
-        gameHistory: updatedUserProfile.gameHistory,
-        highestScore: updatedUserProfile.highestScore,
-        numberOfRestarts: updatedUserProfile.numberOfRestarts,
-        highestTimestamp: updatedUserProfile.highestTimestamp,
-        highestWordCount: updatedUserProfile.highestWordCount,
-        gameTimeAtHighest: updatedUserProfile.gameTimeAtHighest,
-        totalNumberOfWordsAtHighest:
-          updatedUserProfile.totalNumberOfWordsAtHighest,
-        ratings: updatedUserProfile.ratings,
-        token: await updatedUserProfile.generateJWT(),
-        createdAt:updatedUserProfile.createdAt
-      });
-    
-
-   
+    user.avatar = req.body.avatar;
+    const updatedUserProfile = await user.save();
+    console.log("owoowowowoow", updatedUserProfile);
+    res.json({
+      _id: updatedUserProfile._id,
+      avatar: updatedUserProfile.avatar,
+      username: updatedUserProfile.username,
+      password: updatedUserProfile.password,
+      admin: updatedUserProfile.admin,
+      gameHistory: updatedUserProfile.gameHistory,
+      highestScore: updatedUserProfile.highestScore,
+      numberOfRestarts: updatedUserProfile.numberOfRestarts,
+      highestTimestamp: updatedUserProfile.highestTimestamp,
+      highestWordCount: updatedUserProfile.highestWordCount,
+      gameTimeAtHighest: updatedUserProfile.gameTimeAtHighest,
+      totalNumberOfWordsAtHighest: updatedUserProfile.totalNumberOfWordsAtHighest,
+      ratings: updatedUserProfile.ratings,
+      token: await updatedUserProfile.generateJWT(),
+      createdAt: updatedUserProfile.createdAt,
+    });
   } catch (error) {
     next(error);
   }
