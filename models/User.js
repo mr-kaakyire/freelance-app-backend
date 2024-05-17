@@ -11,6 +11,7 @@ const UserSchema = new Schema(
     username: { type: String, required: true },
     password: { type: String, required: true },
     admin: { type: Boolean, required: false },
+    streak:{type:Number,required:true,default:0},
     gameHistory:[{
 
       wordCount:{type:Number},

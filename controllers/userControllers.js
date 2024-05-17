@@ -26,6 +26,7 @@ const registerUser = async (req, res, next) => {
     return res.status(200).json({
       _id: user._id,
       avatar: user.avatar,
+      streak:user.streak,
       username: user.username,
       password: user.password,
       admin: user.admin,
@@ -59,6 +60,7 @@ const loginUser = async (req, res, next) => {
       res.status(200).json({
         _id: user._id,
         avatar: user.avatar,
+        streak:user.streak,
         username: user.username,
         password: user.password,
         admin: user.admin,
@@ -88,6 +90,7 @@ const userProfile = async (req, res, next) => {
       return res.status(201).json({
         _id: user._id,
         avatar: user.avatar,
+        streak:user.streak,
         username: user.username,
         password: user.password,
         admin: user.admin,
@@ -129,6 +132,7 @@ const updateGameHistory = async (req, res, next) => {
       gameTimeAtHighest,
       numberOfRestarts,
       totalNumberOfWords,
+      streak
     } = req.body;
 
     let user = await User.findOneAndUpdate(
@@ -148,6 +152,7 @@ const updateGameHistory = async (req, res, next) => {
           },
         },
         $set: {
+          streak:streak,
           numberOfRestarts: numberOfRestarts,
           highestScore: highestScore,
           highestWordCount: highestWordCount,
@@ -162,6 +167,7 @@ const updateGameHistory = async (req, res, next) => {
       _id: user._id,
       avatar: user.avatar,
       username: user.username,
+      streak:user.streak,
       admin: user.admin,
       ratings: user.ratings,
       gameHistory: user.gameHistory,
@@ -190,6 +196,7 @@ const updateAvatar = async (req, res, next) => {
       _id: updatedUserProfile._id,
       avatar: updatedUserProfile.avatar,
       username: updatedUserProfile.username,
+      streak: updatedUserProfile.streak,
       password: updatedUserProfile.password,
       admin: updatedUserProfile.admin,
       gameHistory: updatedUserProfile.gameHistory,
