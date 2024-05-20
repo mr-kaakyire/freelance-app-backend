@@ -10,7 +10,7 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 connectDB();
 const app = express();
-app.use(cors({ origin: 'https://scrabbi-backend.up.railway.app' }));
+app.use(cors({ origin: 'https://scrabbi.vercel.app' }));
 app.options('*', cors());
 app.use(express.json());
 
