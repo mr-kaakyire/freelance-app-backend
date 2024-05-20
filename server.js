@@ -10,7 +10,7 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 connectDB();
 const app = express();
-app.use(cors({ origin: 'http://localhost:4200' }));
+app.use(cors({ origin: 'https://scrabbi-backend.up.railway.app' }));
 app.options('*', cors());
 app.use(express.json());
 
