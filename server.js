@@ -10,8 +10,8 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 connectDB();
 const app = express();
-app.use(cors({ origin: 'https://scrabbi.vercel.app' }));
-app.options('*', cors());
+app.use(cors({ origin: ['https://scrabbi.vercel.app','https://scrabbi-dmct.vercel.app','https://scrabbi-dmct-git-main-mrboahens-projects.vercel.app','https://scrabbi-dmct-muxn40exc-mrboahens-projects.vercel.app'] }));
+// app.options('*', cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
